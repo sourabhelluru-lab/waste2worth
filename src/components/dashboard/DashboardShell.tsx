@@ -7,14 +7,13 @@ const navByRole = {
   seller: [
     { to: "/seller", label: "Overview", icon: LayoutDashboard },
     { to: "/seller/listings", label: "My listings", icon: Package },
-    { to: "/seller/offers", label: "Offers", icon: MessageCircle },
-    { to: "/seller/analytics", label: "Analytics", icon: BarChart3 },
+    { to: "/seller-offers", label: "Offers", icon: MessageCircle },
+    { to: "/seller-analytics", label: "Analytics", icon: BarChart3 },
     { to: "/seller/wallet", label: "Wallet", icon: Wallet },
   ],
   buyer: [
-    { to: "/marketplace", label: "Marketplace", icon: LayoutDashboard },
-    { to: "/buyer/offers", label: "My offers", icon: MessageCircle },
-    { to: "/buyer/orders", label: "Orders", icon: Package },
+  { to: "/marketplace", label: "Marketplace", icon: LayoutDashboard },
+  { to: "/buyer-offers", label: "My Offers", icon: MessageCircle },
   ],
   admin: [
     { to: "/admin", label: "Overview", icon: LayoutDashboard },

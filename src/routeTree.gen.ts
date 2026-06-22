@@ -9,12 +9,30 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SellerOffersRouteImport } from './routes/seller-offers'
+import { Route as SellerAnalyticsRouteImport } from './routes/seller-analytics'
 import { Route as SellerRouteImport } from './routes/seller'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
+import { Route as BuyerOrdersRouteImport } from './routes/buyer-orders'
+import { Route as BuyerOffersRouteImport } from './routes/buyer-offers'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EducationRecyclingGuideRouteImport } from './routes/education/recycling-guide'
+import { Route as EducationPlasticRouteImport } from './routes/education/plastic'
+import { Route as EducationMetalRouteImport } from './routes/education/metal'
+import { Route as EducationEwasteRouteImport } from './routes/education/ewaste'
 
+const SellerOffersRoute = SellerOffersRouteImport.update({
+  id: '/seller-offers',
+  path: '/seller-offers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellerAnalyticsRoute = SellerAnalyticsRouteImport.update({
+  id: '/seller-analytics',
+  path: '/seller-analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SellerRoute = SellerRouteImport.update({
   id: '/seller',
   path: '/seller',
@@ -23,6 +41,16 @@ const SellerRoute = SellerRouteImport.update({
 const MarketplaceRoute = MarketplaceRouteImport.update({
   id: '/marketplace',
   path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuyerOrdersRoute = BuyerOrdersRouteImport.update({
+  id: '/buyer-orders',
+  path: '/buyer-orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuyerOffersRoute = BuyerOffersRouteImport.update({
+  id: '/buyer-offers',
+  path: '/buyer-offers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -40,47 +68,153 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EducationRecyclingGuideRoute = EducationRecyclingGuideRouteImport.update({
+  id: '/education/recycling-guide',
+  path: '/education/recycling-guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationPlasticRoute = EducationPlasticRouteImport.update({
+  id: '/education/plastic',
+  path: '/education/plastic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationMetalRoute = EducationMetalRouteImport.update({
+  id: '/education/metal',
+  path: '/education/metal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EducationEwasteRoute = EducationEwasteRouteImport.update({
+  id: '/education/ewaste',
+  path: '/education/ewaste',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/buyer-offers': typeof BuyerOffersRoute
+  '/buyer-orders': typeof BuyerOrdersRoute
   '/marketplace': typeof MarketplaceRoute
   '/seller': typeof SellerRoute
+  '/seller-analytics': typeof SellerAnalyticsRoute
+  '/seller-offers': typeof SellerOffersRoute
+  '/education/ewaste': typeof EducationEwasteRoute
+  '/education/metal': typeof EducationMetalRoute
+  '/education/plastic': typeof EducationPlasticRoute
+  '/education/recycling-guide': typeof EducationRecyclingGuideRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/buyer-offers': typeof BuyerOffersRoute
+  '/buyer-orders': typeof BuyerOrdersRoute
   '/marketplace': typeof MarketplaceRoute
   '/seller': typeof SellerRoute
+  '/seller-analytics': typeof SellerAnalyticsRoute
+  '/seller-offers': typeof SellerOffersRoute
+  '/education/ewaste': typeof EducationEwasteRoute
+  '/education/metal': typeof EducationMetalRoute
+  '/education/plastic': typeof EducationPlasticRoute
+  '/education/recycling-guide': typeof EducationRecyclingGuideRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
+  '/buyer-offers': typeof BuyerOffersRoute
+  '/buyer-orders': typeof BuyerOrdersRoute
   '/marketplace': typeof MarketplaceRoute
   '/seller': typeof SellerRoute
+  '/seller-analytics': typeof SellerAnalyticsRoute
+  '/seller-offers': typeof SellerOffersRoute
+  '/education/ewaste': typeof EducationEwasteRoute
+  '/education/metal': typeof EducationMetalRoute
+  '/education/plastic': typeof EducationPlasticRoute
+  '/education/recycling-guide': typeof EducationRecyclingGuideRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/auth' | '/marketplace' | '/seller'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/buyer-offers'
+    | '/buyer-orders'
+    | '/marketplace'
+    | '/seller'
+    | '/seller-analytics'
+    | '/seller-offers'
+    | '/education/ewaste'
+    | '/education/metal'
+    | '/education/plastic'
+    | '/education/recycling-guide'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/auth' | '/marketplace' | '/seller'
-  id: '__root__' | '/' | '/admin' | '/auth' | '/marketplace' | '/seller'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/buyer-offers'
+    | '/buyer-orders'
+    | '/marketplace'
+    | '/seller'
+    | '/seller-analytics'
+    | '/seller-offers'
+    | '/education/ewaste'
+    | '/education/metal'
+    | '/education/plastic'
+    | '/education/recycling-guide'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/buyer-offers'
+    | '/buyer-orders'
+    | '/marketplace'
+    | '/seller'
+    | '/seller-analytics'
+    | '/seller-offers'
+    | '/education/ewaste'
+    | '/education/metal'
+    | '/education/plastic'
+    | '/education/recycling-guide'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
+  BuyerOffersRoute: typeof BuyerOffersRoute
+  BuyerOrdersRoute: typeof BuyerOrdersRoute
   MarketplaceRoute: typeof MarketplaceRoute
   SellerRoute: typeof SellerRoute
+  SellerAnalyticsRoute: typeof SellerAnalyticsRoute
+  SellerOffersRoute: typeof SellerOffersRoute
+  EducationEwasteRoute: typeof EducationEwasteRoute
+  EducationMetalRoute: typeof EducationMetalRoute
+  EducationPlasticRoute: typeof EducationPlasticRoute
+  EducationRecyclingGuideRoute: typeof EducationRecyclingGuideRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/seller-offers': {
+      id: '/seller-offers'
+      path: '/seller-offers'
+      fullPath: '/seller-offers'
+      preLoaderRoute: typeof SellerOffersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seller-analytics': {
+      id: '/seller-analytics'
+      path: '/seller-analytics'
+      fullPath: '/seller-analytics'
+      preLoaderRoute: typeof SellerAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/seller': {
       id: '/seller'
       path: '/seller'
@@ -93,6 +227,20 @@ declare module '@tanstack/react-router' {
       path: '/marketplace'
       fullPath: '/marketplace'
       preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buyer-orders': {
+      id: '/buyer-orders'
+      path: '/buyer-orders'
+      fullPath: '/buyer-orders'
+      preLoaderRoute: typeof BuyerOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buyer-offers': {
+      id: '/buyer-offers'
+      path: '/buyer-offers'
+      fullPath: '/buyer-offers'
+      preLoaderRoute: typeof BuyerOffersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -116,6 +264,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/education/recycling-guide': {
+      id: '/education/recycling-guide'
+      path: '/education/recycling-guide'
+      fullPath: '/education/recycling-guide'
+      preLoaderRoute: typeof EducationRecyclingGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education/plastic': {
+      id: '/education/plastic'
+      path: '/education/plastic'
+      fullPath: '/education/plastic'
+      preLoaderRoute: typeof EducationPlasticRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education/metal': {
+      id: '/education/metal'
+      path: '/education/metal'
+      fullPath: '/education/metal'
+      preLoaderRoute: typeof EducationMetalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/education/ewaste': {
+      id: '/education/ewaste'
+      path: '/education/ewaste'
+      fullPath: '/education/ewaste'
+      preLoaderRoute: typeof EducationEwasteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -123,8 +299,16 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
+  BuyerOffersRoute: BuyerOffersRoute,
+  BuyerOrdersRoute: BuyerOrdersRoute,
   MarketplaceRoute: MarketplaceRoute,
   SellerRoute: SellerRoute,
+  SellerAnalyticsRoute: SellerAnalyticsRoute,
+  SellerOffersRoute: SellerOffersRoute,
+  EducationEwasteRoute: EducationEwasteRoute,
+  EducationMetalRoute: EducationMetalRoute,
+  EducationPlasticRoute: EducationPlasticRoute,
+  EducationRecyclingGuideRoute: EducationRecyclingGuideRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

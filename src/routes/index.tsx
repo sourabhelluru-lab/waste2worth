@@ -150,15 +150,24 @@ function Landing() {
         <SectionHeading eyebrow="Waste categories" title="Trade every kind of recyclable" />
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((c) => (
-            <div key={c.name} className="group relative overflow-hidden rounded-3xl glass p-6 shadow-elegant transition-all hover:-translate-y-2 hover:shadow-glow">
-              <div className={`grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${c.gradient} text-white shadow-glow`}>
-                <c.icon className="h-7 w-7" />
-              </div>
-              <h3 className="mt-5 text-xl font-semibold">{c.name}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{c.desc}</p>
-              <div className={`absolute -bottom-12 -right-12 h-36 w-36 rounded-full bg-gradient-to-br ${c.gradient} opacity-20 blur-2xl transition-all group-hover:scale-150`} />
-            </div>
-          ))}
+  <Link
+    key={c.name}
+    to="/education/recycling-guide"
+    className="group relative overflow-hidden rounded-3xl glass p-6 shadow-elegant transition-all hover:-translate-y-2 hover:shadow-glow block cursor-pointer"
+  >
+    <div className={`grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br ${c.gradient} text-white shadow-glow`}>
+      <c.icon className="h-7 w-7" />
+    </div>
+
+    <h3 className="mt-5 text-xl font-semibold">{c.name}</h3>
+
+    <p className="mt-1 text-sm text-muted-foreground">
+      {c.desc}
+    </p>
+
+    <div className={`absolute -bottom-12 -right-12 h-36 w-36 rounded-full bg-gradient-to-br ${c.gradient} opacity-20 blur-2xl transition-all group-hover:scale-150`} />
+  </Link>
+))}
         </div>
       </section>
 

@@ -37,6 +37,7 @@ function SellerDashboard() {
   const [category, setCategory] = useState("E-Waste");
   const [price, setPrice] = useState("");
   const [qty, setQty] = useState("");
+  const [image, setImage] = useState<File | null>(null);
 
   useEffect(() => {
     if (!loading && !user) navigate({ to: "/auth" });
@@ -75,14 +76,32 @@ function SellerDashboard() {
     if (!title || !price) { toast.error("Title and price are required"); return; }
     setBusy(true);
     try {
+      let imageUrl = null;
+
+if (image) {
+  const fileName = `${Date.now()}-${image.name.replace(/[^a-zA-Z0-9.-]/g, "-")}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("listings")
+    .upload(fileName, image);
+
+  if (uploadError) throw uploadError;
+
+  const { data } = supabase.storage
+    .from("listings")
+    .getPublicUrl(fileName);
+
+  imageUrl = data.publicUrl;
+}
       const payload = {
-        title,
-        category,
-        price_inr: Number(price) || 0,
-        quantity_kg: Number(qty) || 0,
-        user_id: user.id,
-        status: "live",
-      };
+  title,
+  category,
+  price_inr: Number(price) || 0,
+  quantity_kg: Number(qty) || 0,
+  user_id: user.id,
+  status: "live",
+  image_url: imageUrl,
+};
       if (editing) {
         const { error } = await supabase.from("listings").update(payload).eq("id", editing.id);
         if (error) throw error;
@@ -187,11 +206,22 @@ function SellerDashboard() {
           </div>
           <p className="mt-1 text-xs text-muted-foreground">{editing ? "Update the details below." : "Add details to publish a new listing."}</p>
 
-          <div className="mt-5 grid place-items-center rounded-2xl border-2 border-dashed border-border bg-background/50 p-8 text-center transition-colors hover:border-primary hover:bg-accent/40">
-            <Upload className="h-8 w-8 text-primary" />
-            <p className="mt-3 text-sm font-medium">Drop images here</p>
-            <p className="text-xs text-muted-foreground">PNG, JPG up to 10MB</p>
-          </div>
+          <div className="mt-5 grid place-items-center rounded-2xl border-2 border-dashed border-border bg-background/50 p-8 text-center">
+  <Upload className="h-8 w-8 text-primary" />
+
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => setImage(e.target.files?.[0] || null)}
+    className="mt-3"
+  />
+
+  {image && (
+    <p className="mt-2 text-sm text-emerald-600">
+      Selected: {image.name}
+    </p>
+  )}
+</div>
 
           <form onSubmit={submitListing} className="mt-5 space-y-3">
             <input value={title} onChange={e=>setTitle(e.target.value)} placeholder="Item name" className="w-full rounded-xl border border-border bg-background/60 px-4 py-2.5 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/30" />

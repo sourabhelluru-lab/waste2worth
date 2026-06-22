@@ -19,6 +19,7 @@ type Listing = {
   quantity_kg: number;
   user_id: string;
   status: string;
+  image_url: string | null;
 };
 
 const cats = ["All", "E-Waste", "Paper", "Plastic", "Metal", "Glass", "Cardboard"];
@@ -85,10 +86,17 @@ function Marketplace() {
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map(it => (
               <article key={it.id} className="group overflow-hidden rounded-3xl glass shadow-elegant transition-all hover:-translate-y-1 hover:shadow-glow">
-                <div className={`relative h-44 bg-gradient-to-br ${gradFor(it.category)}`}>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.35),transparent_55%)]" />
-                  <span className="absolute left-4 top-4 rounded-full bg-black/30 px-2.5 py-0.5 text-[11px] font-semibold text-white backdrop-blur">{it.category}</span>
-                </div>
+                <div className="relative h-44">
+  <img
+    src={it.image_url || ""}
+    alt={it.title}
+    className="h-full w-full object-cover"
+  />
+
+  <span className="absolute left-4 top-4 rounded-full bg-black/30 px-2.5 py-0.5 text-[11px] font-semibold text-white backdrop-blur">
+    {it.category}
+  </span>
+</div>
                 <div className="p-5">
                   <div className="flex items-start justify-between gap-3">
                     <div>
